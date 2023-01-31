@@ -1,0 +1,19 @@
+.box {
+  position: relative;
+}
+
+.form {
+  position: absolute;
+  /* top: 70px; */
+}
+
+.input {
+  display: block;
+  cursor: text;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.label {
+  font-size: 13px;
+}
