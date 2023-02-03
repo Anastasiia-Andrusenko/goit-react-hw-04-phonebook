@@ -1,12 +1,12 @@
-import { Component } from "react";
+// import { Component } from "react";
 import css from "../ContactForm/ContactForm.module.css";
 import classNames from "classnames";
 import { nanoid } from "nanoid";
 import PropTypes from 'prop-types';
 
-export class ContactForm extends Component {
-
-  toggleForm = (evt) => {
+const ContactForm = ({ onAddContact }) => {
+  
+  const toggleForm = (evt) => {
     // console.log(evt.target);
     const btnRef = evt.target;
     const formRef = btnRef.nextSibling;
@@ -21,8 +21,7 @@ export class ContactForm extends Component {
     }
   }
 
-
-  addContact = (evt) => {
+  const addContact = (evt) => {
     evt.preventDefault();
     const form = evt.target;
     const { name, number } = form.elements;
@@ -32,17 +31,16 @@ export class ContactForm extends Component {
       id: nanoid(),
     }
 
-    this.props.onAddContact(contact);
+    onAddContact(contact);
     name.value = "";
     number.value = "";
   }
 
-  render() {
-    return <div className={css.container}>
-      <button type="button" className={css.btn} onClick={this.toggleForm}>+</button>
-      <form
+  return <div className={css.container}>
+      <button type="button" className={css.btn} onClick={toggleForm}>+</button>
+       <form
         className={classNames(css.visually_hidden, css.form)}
-        onSubmit={this.addContact}> 
+        onSubmit={addContact}> 
         <label className={css.label}>
           Name
           <input className={css.input}
@@ -66,8 +64,10 @@ export class ContactForm extends Component {
         <button type="submit" className={classNames(css.btn, css.add)}>Add contact</button>
       </form>
       </div>
-  }
+
 }
+
+export default ContactForm;
 
 ContactForm.propTypes = {
   onAddContact: PropTypes.func.isRequired,
